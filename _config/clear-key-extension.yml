@@ -1,0 +1,17 @@
+---
+Name: cache-key-extension
+---
+SilverStripe\Core\Injector\Injector:
+  Psr\SimpleCache\CacheInterface.cacheblock:
+    constructor:
+      defaultLifetime: 86400
+  Psr\SimpleCache\CacheInterface.QuinnInteractiveClearKey:
+    factory: SilverStripe\Core\Cache\CacheFactory
+    constructor:
+      namespace: "QuinnInteractiveClearKey"
+      defaultLifetime: 86400
+      args:
+        disable-container: true
+SilverStripe\ORM\DataObject:
+  extensions:
+    - QuinnInteractive\ClearKey\Extensions\ClearKeyExtension

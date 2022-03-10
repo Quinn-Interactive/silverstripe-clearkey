@@ -1,0 +1,39 @@
+{
+  "name": "quinninteractive/silverstripe-clearkey",
+  "description": "Silverstripe module to manage partial-cache invalidation",
+  "type": "silverstripe-vendormodule",
+  "keywords": [
+    "silverstripe",
+    "cache",
+    "caching",
+    "key",
+    "invalidation",
+    "flush"
+  ],
+  "license": "BSD-3-Clause",
+  "authors": [
+      {
+          "name": "Quinn Interactive, Inc.",
+          "email": "support+clearkey@quinn.com",
+          "homepage": "https://quinn.com/",
+          "role": "Developer"
+      }
+  ],
+  "require": {
+    "php": "^7.4 || ^8.0",
+    "silverstripe/vendor-plugin": "^1.0",
+    "silverstripe/framework": "^4.0"
+  },
+  "autoload": {
+      "psr-4": {
+          "QuinnInteractive\\ClearKey\\": "src/"
+      }
+  },
+  "extra": {
+    "expose": [
+      "client/images"
+    ]
+  },
+  "prefer-stable": true,
+  "minimum-stability": "dev"
+}
