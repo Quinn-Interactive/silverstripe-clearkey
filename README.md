@@ -53,4 +53,4 @@ QuinnInteractive\ClearKey\Extensions\ClearKeyExtension:
       - SilverStripe\CMS\Model\Etc
 ```
 
-Current version: 0.0.0
+Current version: 1.0.0-rc1
