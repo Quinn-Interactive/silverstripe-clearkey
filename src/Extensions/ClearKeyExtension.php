@@ -28,7 +28,7 @@ class ClearKeyExtension extends DataExtension implements Flushable
         return $value;
     }
 
-    public function invalidateInvalidClearKeys($stage = Versioned::DRAFT)
+    public function invalidateInvalidClearKeys(string $stage = Versioned::DRAFT): void
     {
         $keys = Config::inst()->get(self::class, 'invalidators');
         // check to see if we are an invalidator for any keys
@@ -53,40 +53,46 @@ class ClearKeyExtension extends DataExtension implements Flushable
         }
     }
 
-    public function onBeforeArchive()
+    public function onBeforeArchive(): void
     {
         $this->invalidateInvalidClearKeys(Versioned::DRAFT);
         $this->invalidateInvalidClearKeys(Versioned::LIVE);
     }
 
+    /**
+     * @return void
+     */
     public function onBeforeDelete()
     {
         $this->invalidateInvalidClearKeys(Versioned::DRAFT);
     }
 
-    public function onBeforePublish()
+    public function onBeforePublish(): void
     {
         $this->invalidateInvalidClearKeys(Versioned::LIVE);
     }
 
-    public function onBeforeUnpublish()
+    public function onBeforeUnpublish(): void
     {
         $this->invalidateInvalidClearKeys(Versioned::LIVE);
     }
 
+    /**
+     * @return void
+     */
     public function onBeforeWrite()
     {
         $this->invalidateInvalidClearKeys(Versioned::DRAFT);
     }
 
-    protected function createClearKey($key)
+    protected function createClearKey($key): string
     {
         $value = $this->generateClearKeyValue($key);
         $this->cache()->set($key, $value);
         return $value;
     }
 
-    protected function generateClearKeyValue($key)
+    protected function generateClearKeyValue($key): string
     {
         $d = new \DateTime();
         return $key . ':' . $d->format('Y-m-d\TH:i:s.u');
@@ -106,6 +112,9 @@ class ClearKeyExtension extends DataExtension implements Flushable
         return $this->cache()->get($key);
     }
 
+    /**
+     * @return void
+     */
     public static function flush()
     {
         self::getCache()->clear();
@@ -117,7 +126,12 @@ class ClearKeyExtension extends DataExtension implements Flushable
         return $cache;
     }
 
-    public static function invalidateClearKey($key, $stage = Versioned::DRAFT)
+    /**
+     * @param (int|string) $key
+     *
+     * @psalm-param array-key $key
+     */
+    public static function invalidateClearKey($key, string $stage = Versioned::DRAFT): void
     {
         $orig_stage = Versioned::get_stage();
         if ($orig_stage) {
