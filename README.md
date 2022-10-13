@@ -1,9 +1,9 @@
 # ClearKey: A Silverstripe module to manage partial-cache invalidation
 
-When using Silverstripe’s partial caching, the keys you use can usually be grouped into two types
+When using Silverstripe’s partial caching, the keys you use can usually be grouped into two types.
 
-1. Cache _identifier_ keys, which help tell one cache block from another.
-2. Cache _clearing_ keys, which tell us when a block is stale.
+1. Cache _identifier_ keys, which help tell one cache block from another
+2. Cache _clearing_ keys, which tell us when a block is stale
 
 Take this partial-cache block as an example:
 
@@ -35,7 +35,7 @@ ClearKey solves this by letting you manage the calculating of clearing of stale 
 <% end_cached %>
 ```
 
-You define the clear keys with a corresponding config to describe which classes being updated should invalidate the keys:
+You define the clear keys with a corresponding config to describe which classes being updated should invalidate each key. In the example below, the `Promo` key is invaldated whenever a `Promo` or `SiteTree` is saved.
 
 ```yaml
 ---
@@ -53,4 +53,4 @@ QuinnInteractive\ClearKey\Extensions\ClearKeyExtension:
       - SilverStripe\CMS\Model\Etc
 ```
 
-Current version: 0.0.0
+Current version: 1.0.0-rc1

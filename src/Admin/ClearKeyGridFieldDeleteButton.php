@@ -12,6 +12,9 @@ use SilverStripe\Versioned\Versioned;
 
 class ClearKeyGridFieldDeleteButton implements GridField_ColumnProvider, GridField_ActionProvider
 {
+    /**
+     * @return void
+     */
     public function augmentColumns($gridField, &$columns)
     {
         if (!in_array('Actions', $columns)) {
@@ -50,6 +53,7 @@ class ClearKeyGridFieldDeleteButton implements GridField_ColumnProvider, GridFie
         if ($columnName == 'Actions') {
             return ['title' => ''];
         }
+        return [];
     }
 
     public function getColumnsHandled($gridField)
@@ -57,6 +61,9 @@ class ClearKeyGridFieldDeleteButton implements GridField_ColumnProvider, GridFie
         return ['Actions'];
     }
 
+    /**
+     * @return void
+     */
     public function handleAction(GridField $gridField, $actionName, $arguments, $data)
     {
         if ($actionName == 'deleteclearkey') {
