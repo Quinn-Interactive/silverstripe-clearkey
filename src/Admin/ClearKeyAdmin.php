@@ -4,6 +4,7 @@ namespace QuinnInteractive\ClearKey\Admin;
 
 use QuinnInteractive\ClearKey\Extensions\ClearKeyExtension;
 use SilverStripe\Admin\LeftAndMain;
+use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Form;
@@ -29,7 +30,10 @@ class ClearKeyAdmin extends LeftAndMain implements PermissionProvider
     private static $required_permission_codes = 'CMS_ACCESS_ClearKeyAdmin';
     private static $url_segment = 'clearkey';
 
-    // @TODO move this into a GridField_ActionProvider
+    /**
+     * @TODO move this into a GridField_ActionProvider
+     * @return HTTPResponse|string
+     */
     public function doClearAll()
     {
         $cache = ClearKeyExtension::getCache();
@@ -37,7 +41,7 @@ class ClearKeyAdmin extends LeftAndMain implements PermissionProvider
         return $this->redirect($this->Link() . '?m=' . microtime(1));
     }
 
-    public function getEditForm($id = null, $fields = null)
+    public function getEditForm($id = null, $fields = null): Form
     {
         // List all reports
         if (null === $fields) {
@@ -48,7 +52,7 @@ class ClearKeyAdmin extends LeftAndMain implements PermissionProvider
             new GridFieldDataColumns(),
             new GridFieldFooter()
         );
-        $gridField = new GridField('ClearKeys', false, self::getClearKeys(), $gridFieldConfig);
+        $gridField = new GridField('ClearKeys', null, self::getClearKeys(), $gridFieldConfig);
         $config = $gridField->getConfig();
         /** @var GridFieldDataColumns $columns */
         $columns = $config->getComponentByType('SilverStripe\\Forms\\GridField\\GridFieldDataColumns');
@@ -72,7 +76,7 @@ class ClearKeyAdmin extends LeftAndMain implements PermissionProvider
         $form->addExtraClass('panel panel--padded panel--scrollable cms-edit-form cms-panel-padded' . $this->BaseCSSClasses());
         $form->loadDataFrom($this->request->getVars());
         $this->extend('updateEditForm', $form);
-
+        /** @var Form */
         return $form;
     }
 
@@ -81,6 +85,11 @@ class ClearKeyAdmin extends LeftAndMain implements PermissionProvider
         return 'admin/' . Config::inst()->get(self::class, 'url_segment');
     }
 
+    /**
+     * @return string[][]
+     *
+     * @psalm-return array{CMS_ACCESS_ClearKeyAdmin: array{name: string, category: string, help: string}}
+     */
     public function providePermissions()
     {
         return [
@@ -99,7 +108,7 @@ class ClearKeyAdmin extends LeftAndMain implements PermissionProvider
         ];
     }
 
-    public static function getClearKeys()
+    public static function getClearKeys(): ArrayList
     {
         $orig_stage = Versioned::get_stage();
         $cache = ClearKeyExtension::getCache();
