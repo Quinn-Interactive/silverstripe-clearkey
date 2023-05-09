@@ -1,57 +1,56 @@
 {
-  "name": "quinninteractive/silverstripe-clearkey",
-  "description": "Silverstripe module to manage partial-cache invalidation",
-  "type": "silverstripe-vendormodule",
-  "keywords": [
-    "silverstripe",
-    "cache",
-    "caching",
-    "key",
-    "invalidation",
-    "flush"
-  ],
-  "license": "BSD-3-Clause",
-  "authors": [
-      {
-          "name": "Quinn Interactive, Inc.",
-          "email": "support+clearkey@quinn.com",
-          "homepage": "https://quinn.com/",
-          "role": "Developer"
-      }
-  ],
-  "require": {
-    "php": "^8.0 || ^7.4",
-    "silverstripe/vendor-plugin": "^1.0",
-    "silverstripe/framework": "^4.0",
-    "silverstripe/versioned": "^1.0",
-    "silverstripe/admin": "^1.0"
-  },
-  "autoload": {
-      "psr-4": {
-          "QuinnInteractive\\ClearKey\\": "src/"
-      }
-  },
-  "extra": {
-    "expose": [
-      "client/images"
-    ]
-  },
-  "prefer-stable": true,
-  "minimum-stability": "dev",
-  "config": {
-    "allow-plugins": {
-      "composer/installers": true,
-      "silverstripe/vendor-plugin": true,
-      "phpstan/extension-installer": true
+    "name": "quinninteractive/silverstripe-clearkey",
+    "description": "Silverstripe module to manage partial-cache invalidation",
+    "type": "silverstripe-vendormodule",
+    "keywords": [
+        "silverstripe",
+        "cache",
+        "caching",
+        "key",
+        "invalidation",
+        "flush"
+    ],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Quinn Interactive, Inc.",
+            "email": "support+clearkey@quinn.com",
+            "homepage": "https://quinn.com/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "silverstripe/vendor-plugin": "^1.0 || ^2.0",
+        "silverstripe/framework": "^4.0 || ^5.0",
+        "silverstripe/versioned": "^1.0 || ^2.0",
+        "silverstripe/admin": "^1.0 || ^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "QuinnInteractive\\ClearKey\\": "src/"
+        }
+    },
+    "extra": {
+        "expose": [
+            "client/images"
+        ]
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev",
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "silverstripe/vendor-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "require-dev": {
+        "cambis/silverstan": "^1.0@alpha",
+        "cambis/silverstripe-rector": "^0.7.0",
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan": "^1.12",
+        "phpstan/phpstan-deprecation-rules": "^1.2",
+        "rector/rector": "^1.2",
+        "silverstripe/standards": "^1.2"
     }
-  },
-  "require-dev": {
-    "cambis/silverstan": "^1.0@alpha",
-    "cambis/silverstripe-rector": "^0.7.0",
-    "phpstan/extension-installer": "^1.4",
-    "phpstan/phpstan": "^1.12",
-    "phpstan/phpstan-deprecation-rules": "^1.2",
-    "rector/rector": "^1.2",
-    "silverstripe/standards": "^1.2"
-  }
 }
