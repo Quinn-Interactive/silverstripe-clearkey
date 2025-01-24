@@ -41,10 +41,17 @@
   "config": {
     "allow-plugins": {
       "composer/installers": true,
-      "silverstripe/vendor-plugin": true
+      "silverstripe/vendor-plugin": true,
+      "phpstan/extension-installer": true
     }
   },
   "require-dev": {
-    "vimeo/psalm": "^4.29"
+    "cambis/silverstan": "^1.0@alpha",
+    "cambis/silverstripe-rector": "^0.7.0",
+    "phpstan/extension-installer": "^1.4",
+    "phpstan/phpstan": "^1.12",
+    "phpstan/phpstan-deprecation-rules": "^1.2",
+    "rector/rector": "^1.2",
+    "silverstripe/standards": "^1.2"
   }
 }
