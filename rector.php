@@ -11,7 +11,7 @@ return RectorConfig::configure()
     ->withPaths([
         __DIR__ . '/src',
     ])
-    ->withPhpSets(php74: true)
+    ->withPhpSets(php83: true)
     ->withSkip([
         ChangeSwitchToMatchRector::class,
     ])

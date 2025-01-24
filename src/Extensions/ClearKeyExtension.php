@@ -5,12 +5,16 @@ namespace QuinnInteractive\ClearKey\Extensions;
 use Psr\SimpleCache\CacheInterface;
 use SilverStripe\Core\ClassInfo;
 use SilverStripe\Core\Config\Config;
+use SilverStripe\Core\Extension;
 use SilverStripe\Core\Flushable;
 use SilverStripe\Core\Injector\Injector;
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\ORM\DataObject;
 use SilverStripe\Versioned\Versioned;
 
-class ClearKeyExtension extends DataExtension implements Flushable
+/**
+ * @method (DataObject & static) getOwner()
+ */
+class ClearKeyExtension extends Extension implements Flushable
 {
     protected static $cleared_keys = [];
 
@@ -115,6 +119,7 @@ class ClearKeyExtension extends DataExtension implements Flushable
     /**
      * @return void
      */
+    #[\Override]
     public static function flush()
     {
         self::getCache()->clear();
@@ -128,8 +133,6 @@ class ClearKeyExtension extends DataExtension implements Flushable
 
     /**
      * @param (int|string) $key
-     *
-     * @psalm-param array-key $key
      */
     public static function invalidateClearKey($key, string $stage = Versioned::DRAFT): void
     {

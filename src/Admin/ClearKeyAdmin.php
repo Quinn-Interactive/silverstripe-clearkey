@@ -41,6 +41,7 @@ class ClearKeyAdmin extends LeftAndMain implements PermissionProvider
         return $this->redirect($this->Link() . '?m=' . microtime(true));
     }
 
+    #[\Override]
     public function getEditForm($id = null, $fields = null): Form
     {
         // List all reports
@@ -78,16 +79,13 @@ class ClearKeyAdmin extends LeftAndMain implements PermissionProvider
         return $form;
     }
 
+    #[\Override]
     public function Link($action = null)
     {
         return 'admin/' . Config::inst()->get(self::class, 'url_segment');
     }
 
-    /**
-     * @return string[][]
-     *
-     * @psalm-return array{CMS_ACCESS_ClearKeyAdmin: array{name: string, category: string, help: string}}
-     */
+    #[\Override]
     public function providePermissions()
     {
         return [
