@@ -12,7 +12,7 @@ use SilverStripe\Versioned\Versioned;
 
 class ClearKeyExtension extends DataExtension implements Flushable
 {
-    private static $cleared_keys = [];
+    protected static $cleared_keys = [];
 
     public function cache()
     {
