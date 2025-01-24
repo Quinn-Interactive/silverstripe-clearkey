@@ -38,7 +38,7 @@ class ClearKeyAdmin extends LeftAndMain implements PermissionProvider
     {
         $cache = ClearKeyExtension::getCache();
         $cache->clear();
-        return $this->redirect($this->Link() . '?m=' . microtime(1));
+        return $this->redirect($this->Link() . '?m=' . microtime(true));
     }
 
     public function getEditForm($id = null, $fields = null): Form
@@ -48,9 +48,9 @@ class ClearKeyAdmin extends LeftAndMain implements PermissionProvider
             $fields = FieldList::create();
         }
         $gridFieldConfig = GridFieldConfig::create()->addComponents(
-            new GridFieldSortableHeader(),
-            new GridFieldDataColumns(),
-            new GridFieldFooter()
+            GridFieldSortableHeader::create(),
+            GridFieldDataColumns::create(),
+            GridFieldFooter::create()
         );
         $gridField = GridField::create('ClearKeys', null, self::getClearKeys(), $gridFieldConfig);
         $config = $gridField->getConfig();

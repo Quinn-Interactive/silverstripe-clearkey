@@ -8,12 +8,8 @@ use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Flushable;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\ORM\DataExtension;
-use SilverStripe\ORM\DataObject;
 use SilverStripe\Versioned\Versioned;
 
-/**
- * @method DataObject&static getOwner()
- */
 class ClearKeyExtension extends DataExtension implements Flushable
 {
     protected static $cleared_keys = [];
