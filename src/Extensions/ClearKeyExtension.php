@@ -8,8 +8,12 @@ use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Flushable;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\ORM\DataExtension;
+use SilverStripe\ORM\DataObject;
 use SilverStripe\Versioned\Versioned;
 
+/**
+ * @method DataObject&static getOwner()
+ */
 class ClearKeyExtension extends DataExtension implements Flushable
 {
     protected static $cleared_keys = [];
@@ -37,7 +41,7 @@ class ClearKeyExtension extends DataExtension implements Flushable
                 // we only need to clear once per page request
                 $staged_keys = array_key_exists($stage, self::$cleared_keys) ? self::$cleared_keys[$stage] : [];
                 if (!in_array($key, $staged_keys)) {
-                    $class = $this->owner->ClassName;
+                    $class = $this->getOwner()->ClassName;
                     if (is_array($list) && count($list)) {
                         foreach ($list as $invalidator) {
                             if ($class == $invalidator || in_array($invalidator, ClassInfo::ancestry($class))) {
