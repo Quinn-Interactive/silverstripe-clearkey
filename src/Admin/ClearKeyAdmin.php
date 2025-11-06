@@ -14,10 +14,10 @@ use SilverStripe\Forms\GridField\GridFieldConfig;
 use SilverStripe\Forms\GridField\GridFieldDataColumns;
 use SilverStripe\Forms\GridField\GridFieldFooter;
 use SilverStripe\Forms\GridField\GridFieldSortableHeader;
-use SilverStripe\ORM\ArrayList;
+use SilverStripe\Model\ArrayData;
+use SilverStripe\Model\List\ArrayList;
 use SilverStripe\Security\PermissionProvider;
 use SilverStripe\Versioned\Versioned;
-use SilverStripe\View\ArrayData;
 
 class ClearKeyAdmin extends LeftAndMain implements PermissionProvider
 {

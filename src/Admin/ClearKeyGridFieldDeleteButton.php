@@ -8,8 +8,8 @@ use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridField_ActionProvider;
 use SilverStripe\Forms\GridField\GridField_ColumnProvider;
 use SilverStripe\Forms\GridField\GridField_FormAction;
+use SilverStripe\Model\ModelData;
 use SilverStripe\Versioned\Versioned;
-use SilverStripe\View\ViewableData;
 
 class ClearKeyGridFieldDeleteButton implements GridField_ColumnProvider, GridField_ActionProvider
 {
@@ -32,7 +32,7 @@ class ClearKeyGridFieldDeleteButton implements GridField_ColumnProvider, GridFie
 
     /**
      * @param GridField $gridField
-     * @param ViewableData $record
+     * @param ModelData $record
      */
     #[\Override]
     public function getColumnAttributes($gridField, $record, $columnName)
@@ -42,7 +42,7 @@ class ClearKeyGridFieldDeleteButton implements GridField_ColumnProvider, GridFie
 
     /**
      * @param GridField $gridField
-     * @param ViewableData $record
+     * @param ModelData $record
      */
     #[\Override]
     public function getColumnContent($gridField, $record, $columnName)

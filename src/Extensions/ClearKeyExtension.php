@@ -12,7 +12,7 @@ use SilverStripe\ORM\DataObject;
 use SilverStripe\Versioned\Versioned;
 
 /**
- * @method (DataObject & static) getOwner()
+ * @extends Extension<DataObject&static>
  */
 class ClearKeyExtension extends Extension implements Flushable
 {
