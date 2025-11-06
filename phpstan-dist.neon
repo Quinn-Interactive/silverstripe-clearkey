@@ -3,13 +3,6 @@ parameters:
     treatPhpDocTypesAsCertain: false
     editorUrlTitle: '%%relFile%%:%%line%%'
     ignoreErrors:
-        - identifier: classConstant.deprecatedClass
-        - identifier: generics.notCompatible
-        - identifier: method.deprecatedClass
-        - identifier: new.deprecatedClass
-        - identifier: return.deprecatedClass
-        - identifier: silverstan.configurationProperty.deprecated
-        - identifier: staticMethod.deprecatedClass
     silverstan:
         disallowMethodCallOnUnsafeDataObject:
             enabled: false

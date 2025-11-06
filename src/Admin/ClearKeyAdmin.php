@@ -117,7 +117,7 @@ class ClearKeyAdmin extends LeftAndMain implements PermissionProvider
             $data['Draft'] = $cache->get($key);
             Versioned::set_stage(Versioned::LIVE);
             $data['Live'] = $cache->get($key);
-            $results[] = ArrayData::create($data);
+            $results->push(ArrayData::create($data));
             $id++;
         }
         Versioned::set_stage($orig_stage);
