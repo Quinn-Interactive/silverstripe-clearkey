@@ -38,24 +38,25 @@ class ClearKeyAdmin extends LeftAndMain implements PermissionProvider
     {
         $cache = ClearKeyExtension::getCache();
         $cache->clear();
-        return $this->redirect($this->Link() . '?m=' . microtime(1));
+        return $this->redirect($this->Link() . '?m=' . microtime(true));
     }
 
+    #[\Override]
     public function getEditForm($id = null, $fields = null): Form
     {
         // List all reports
         if (null === $fields) {
-            $fields = new FieldList();
+            $fields = FieldList::create();
         }
         $gridFieldConfig = GridFieldConfig::create()->addComponents(
-            new GridFieldSortableHeader(),
-            new GridFieldDataColumns(),
-            new GridFieldFooter()
+            GridFieldSortableHeader::create(),
+            GridFieldDataColumns::create(),
+            GridFieldFooter::create()
         );
-        $gridField = new GridField('ClearKeys', null, self::getClearKeys(), $gridFieldConfig);
+        $gridField = GridField::create('ClearKeys', null, self::getClearKeys(), $gridFieldConfig);
         $config = $gridField->getConfig();
         /** @var GridFieldDataColumns $columns */
-        $columns = $config->getComponentByType('SilverStripe\\Forms\\GridField\\GridFieldDataColumns');
+        $columns = $config->getComponentByType(GridFieldDataColumns::class);
         $columns->setDisplayFields([
             'Title' => 'Title',
             'Draft' => 'Draft',
@@ -69,10 +70,8 @@ class ClearKeyAdmin extends LeftAndMain implements PermissionProvider
         $fields->push($gridField);
 
         // @TODO move this into a GridField_ActionProvider
-        $actions = new FieldList(
-            new FormAction('doClearAll', 'Clear All')
-        );
-        $form = new Form($this, 'EditForm', $fields, $actions);
+        $actions = FieldList::create(FormAction::create('doClearAll', 'Clear All'));
+        $form = Form::create($this, 'EditForm', $fields, $actions);
         $form->addExtraClass('panel panel--padded panel--scrollable cms-edit-form cms-panel-padded' . $this->BaseCSSClasses());
         $form->loadDataFrom($this->request->getVars());
         $this->extend('updateEditForm', $form);
@@ -80,16 +79,13 @@ class ClearKeyAdmin extends LeftAndMain implements PermissionProvider
         return $form;
     }
 
+    #[\Override]
     public function Link($action = null)
     {
         return 'admin/' . Config::inst()->get(self::class, 'url_segment');
     }
 
-    /**
-     * @return string[][]
-     *
-     * @psalm-return array{CMS_ACCESS_ClearKeyAdmin: array{name: string, category: string, help: string}}
-     */
+    #[\Override]
     public function providePermissions()
     {
         return [
@@ -101,7 +97,7 @@ class ClearKeyAdmin extends LeftAndMain implements PermissionProvider
                 ),
                 'category' => _t('SilverStripe\\Security\\Permission.CMS_ACCESS_CATEGORY', 'CMS Access'),
                 'help'     => _t(
-                    __CLASS__ . '.ACCESS_HELP',
+                    self::class . '.ACCESS_HELP',
                     'Allow viewing of the cache key clearing section.'
                 ),
             ],
@@ -113,7 +109,7 @@ class ClearKeyAdmin extends LeftAndMain implements PermissionProvider
         $orig_stage = Versioned::get_stage();
         $cache = ClearKeyExtension::getCache();
         $invalidators = Config::inst()->get(ClearKeyExtension::class, 'invalidators');
-        $results = new ArrayList();
+        $results = ArrayList::create();
         $id = 1;
         foreach ($invalidators as $key => $list) {
             $data = ['ID' => $id, 'Title' => $key];
@@ -121,7 +117,7 @@ class ClearKeyAdmin extends LeftAndMain implements PermissionProvider
             $data['Draft'] = $cache->get($key);
             Versioned::set_stage(Versioned::LIVE);
             $data['Live'] = $cache->get($key);
-            $results[] = new ArrayData($data);
+            $results[] = ArrayData::create($data);
             $id++;
         }
         Versioned::set_stage($orig_stage);
