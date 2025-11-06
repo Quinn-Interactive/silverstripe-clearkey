@@ -9,12 +9,14 @@ use SilverStripe\Forms\GridField\GridField_ActionProvider;
 use SilverStripe\Forms\GridField\GridField_ColumnProvider;
 use SilverStripe\Forms\GridField\GridField_FormAction;
 use SilverStripe\Versioned\Versioned;
+use SilverStripe\View\ViewableData;
 
 class ClearKeyGridFieldDeleteButton implements GridField_ColumnProvider, GridField_ActionProvider
 {
     /**
      * @return void
      */
+    #[\Override]
     public function augmentColumns($gridField, &$columns)
     {
         if (!in_array('Actions', $columns)) {
@@ -22,16 +24,27 @@ class ClearKeyGridFieldDeleteButton implements GridField_ColumnProvider, GridFie
         }
     }
 
+    #[\Override]
     public function getActions($gridField)
     {
         return ['deleteclearkey'];
     }
 
+    /**
+     * @param GridField $gridField
+     * @param ViewableData $record
+     */
+    #[\Override]
     public function getColumnAttributes($gridField, $record, $columnName)
     {
         return ['class' => 'grid-field__col-compact'];
     }
 
+    /**
+     * @param GridField $gridField
+     * @param ViewableData $record
+     */
+    #[\Override]
     public function getColumnContent($gridField, $record, $columnName)
     {
         $field = GridField_FormAction::create(
@@ -48,6 +61,7 @@ class ClearKeyGridFieldDeleteButton implements GridField_ColumnProvider, GridFie
         return $field->Field();
     }
 
+    #[\Override]
     public function getColumnMetadata($gridField, $columnName)
     {
         if ($columnName == 'Actions') {
@@ -56,6 +70,7 @@ class ClearKeyGridFieldDeleteButton implements GridField_ColumnProvider, GridFie
         return [];
     }
 
+    #[\Override]
     public function getColumnsHandled($gridField)
     {
         return ['Actions'];
@@ -64,6 +79,7 @@ class ClearKeyGridFieldDeleteButton implements GridField_ColumnProvider, GridFie
     /**
      * @return void
      */
+    #[\Override]
     public function handleAction(GridField $gridField, $actionName, $arguments, $data)
     {
         if ($actionName == 'deleteclearkey') {
