@@ -1,6 +1,0 @@
-parameters:
-	ignoreErrors:
-		-
-			message: "#^@method annotation '\\(DataObject & static\\) getOwner\\(\\)' isn't expected and should be removed\\.$#"
-			count: 1
-			path: src/Extensions/ClearKeyExtension.php
