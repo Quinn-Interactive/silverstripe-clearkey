@@ -20,7 +20,7 @@
     }
   ],
   "require": {
-    "silverstripe/admin": "^3.0",
+    "silverstripe/admin": "^3.1",
     "silverstripe/framework": "^6.0",
     "silverstripe/versioned": "^3.0"
   },
